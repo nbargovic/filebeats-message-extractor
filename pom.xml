@@ -36,10 +36,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <!-- https://github.com/jcustenborder/extended-log-format-parser -->
-      <groupId>com.github.jcustenborder.parsers</groupId>
-      <artifactId>extended-log-format</artifactId>
-      <version>0.0.2.13</version>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.15</version>
     </dependency>
 
     <!-- KStreams dependencies -->
@@ -110,7 +109,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>src/main/</classpathPrefix>
-              <mainClass>io.confluent.ps.convert.ParseElffStream</mainClass>
+              <mainClass>io.confluent.ps.convert.FilebeatsMessageExtractor</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>.</Class-Path>
@@ -129,7 +128,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>src/main/</classpathPrefix>
-              <mainClass>io.confluent.ps.convert.ParseElffStream</mainClass>
+              <mainClass>io.confluent.ps.convert.FilebeatsMessageExtractor</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>.</Class-Path>

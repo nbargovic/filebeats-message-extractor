@@ -49,8 +49,8 @@ public class SendToDeadLetterQueueProductionExceptionHandler implements Producti
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
         props.put(StreamsConfig.SECURITY_PROTOCOL_CONFIG, configs.get("security.protocol"));
-        props.put(SaslConfigs.SASL_MECHANISM, configs.get("sasl.mechanism"));
-        props.put(SaslConfigs.SASL_JAAS_CONFIG, configs.get("sasl.jaas.config"));
+        //props.put(SaslConfigs.SASL_MECHANISM, configs.get("sasl.mechanism"));
+        //props.put(SaslConfigs.SASL_JAAS_CONFIG, configs.get("sasl.jaas.config"));
 
         dlqProducer = new KafkaProducer<byte[], byte[]>(props);
         dlqTopic = configs.get("error.topic.name").toString();

@@ -6,28 +6,27 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import java.util.concurrent.CountDownLatch;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.Serializer;
-import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
-import org.apache.kafka.streams.kstream.Consumed;
-import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.*;
 import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,36 +107,77 @@ public final class FilebeatsMessageExtractor {
     protected Topology buildTopology(Properties envProps) {
         log.debug("Starting buildTopology");
         final String inputTopicName = envProps.getProperty("input.topic.name");
-        final String outputTopicName = envProps.getProperty("output.topic.name");
+        final String msgTopicName = envProps.getProperty("msg.topic.name");
+        final String metaTopicName = envProps.getProperty("meta.topic.name");
         final String metadataTableName = envProps.getProperty("metadata.ktable.name");
 
         final StreamsBuilder builder = new StreamsBuilder();
 
-        // Build the json Serialiser for log Entry
-        //example from https://github.com/apache/kafka/blob/1.0/streams/examples/src/main/java/org/apache/kafka/streams/examples/pageview/PageViewTypedDemo.java
         Map<String, Object> serdeProps = new HashMap<>();
-        final Serializer<String> fbSerializer = new JsonPOJOSerializer<>();
-        serdeProps.put("JsonPOJOClass", String.class);
+        final Serializer<JsonNode> fbSerializer = new JsonPOJOSerializer<>();
+        serdeProps.put("JsonPOJOClass", JsonNode.class);
         fbSerializer.configure(serdeProps, false);
 
-        final Deserializer<String> fbDeserializer = new JsonPOJODeserializer<>();
-        serdeProps.put("JsonPOJOClass", String.class);
+        final Deserializer<JsonNode> fbDeserializer = new JsonPOJODeserializer<>();
+        serdeProps.put("JsonPOJOClass", JsonNode.class);
         fbDeserializer.configure(serdeProps, false);
 
-        final Serde<String> fbSerde = Serdes.serdeFrom(fbSerializer, fbDeserializer);
+        final Serde<JsonNode> fbSerde = Serdes.serdeFrom(fbSerializer, fbDeserializer);
 
-        final KStream<String, Bytes> beatsStream = builder.stream(inputTopicName, Consumed.with(Serdes.String(), Serdes.Bytes()));
+        final KStream<String, JsonNode> beatsStream = builder.stream(inputTopicName, Consumed.with(Serdes.String(), fbSerde));
 
-        beatsStream.flatMap( (key, beatsData) -> {
-                    List<KeyValue<String, String>> messages= new LinkedList<>();
-                    String beatsValue = beatsData.toString();
+        KStream<String, JsonNode> splits = beatsStream.flatMap( (key, beatsData) -> {
+          List<KeyValue<String, JsonNode>> messages = new LinkedList<>();
+          try {
+            ObjectMapper mapper = new ObjectMapper();
 
-                    //TODO implement message and metadata extract
+            //TODO configure fields to extract, and the field names for the message payload in the dev.properties
+            //TODO move the message json construction to a helper/parser class
 
-                    return messages;
-                });
+            JsonNode idNode = beatsData.get("_id");
+            JsonNode msgNode = beatsData.get("fields").get("message");
+            JsonNode timeNode = beatsData.get("fields").get("@timestamp");
 
-                //TODO emit message to ouptput stream, and metadata to ktable
+            //make the lightweight message only event
+            JsonNode msgPayload = mapper.createObjectNode();
+            ObjectNode msgObject = (ObjectNode)msgPayload;
+            msgObject.put("filebeats_id", idNode.toString());
+            msgObject.put("message", msgNode.toString());
+            msgObject.put("timestamp", timeNode.toString());
+
+            //make the metadata event
+            //TODO replace '.' in the field names with '_' for ktable column naming
+            ObjectNode metaObject = (ObjectNode)beatsData.get("fields");
+            metaObject.remove("message");
+            metaObject.remove("@timestamp");
+            JsonNode metaPayload = mapper.treeToValue(mapper.valueToTree(metaObject), JsonNode.class);
+
+            //TODO update this to something more json friendly like: https://github.com/oyamist/merkle-json
+            String generatedKey = DigestUtils.md5Hex( metaPayload.toString() );
+
+            messages.add(KeyValue.pair(generatedKey, msgPayload));
+            messages.add(KeyValue.pair(generatedKey, metaPayload));
+
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            return messages;
+        });
+
+        KStream<String, JsonNode>[] branches = splits.branch(
+                (id, value) -> Objects.isNull(value.get("message")), //metadata
+                (id, value) -> true                                 //message
+        );
+
+        Materialized m = Materialized.as(metadataTableName);
+        m = m.withKeySerde(Serdes.String());
+        m = m.withValueSerde(fbSerde);
+
+        branches[0].toTable(m);
+        branches[1].to(msgTopicName, Produced.with(Serdes.String(), fbSerde));
+
+
 
         return builder.build();
     }
