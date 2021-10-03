@@ -49,26 +49,11 @@ public final class FilebeatsMessageExtractor {
     protected Properties buildStreamsProperties(Properties envProps) {
         Properties props = new Properties();
         props.putAll(envProps);
-        //props.put(StreamsConfig.APPLICATION_ID_CONFIG, envProps.getProperty("application.id"));
-        //props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, envProps.getProperty("bootstrap.servers"));
+
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, String().getClass());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, String().getClass());
-        //props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, envProps.getProperty("security.protocol"));
-        //props.put(StreamsConfig.SECURITY_PROTOCOL_CONFIG, envProps.getProperty("security.protocol"));
-        //props.put(SaslConfigs.SASL_MECHANISM, envProps.getProperty("sasl.mechanism"));
-        //props.put(SaslConfigs.SASL_JAAS_CONFIG, envProps.getProperty("sasl.jaas.config"));
-
-        //log.debug("SASL Config------");
-        //log.debug("bootstrap.servers={}", envProps.getProperty("bootstrap.servers"));
-        //log.debug("security.protocol={}", envProps.getProperty("security.protocol"));
-        //log.debug("sasl.mechanism={}", envProps.getProperty("sasl.mechanism"));
-        //log.debug("sasl.jaas.config={}", envProps.getProperty("sasl.jaas.config"));
-        //log.debug("-----------------");
-
-        //props.put("error.topic.name", envProps.getProperty("error.topic.name"));
         props.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDeadLetterQueueDeserialicationExceptionHandler.class.getName());
         props.put(StreamsConfig.DEFAULT_PRODUCTION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDeadLetterQueueProductionExceptionHandler.class.getName());
-
 
         // Broken negative timestamp
         props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, WallclockTimestampExtractor.class.getName());
@@ -108,8 +93,10 @@ public final class FilebeatsMessageExtractor {
         log.debug("Starting buildTopology");
         final String inputTopicName = envProps.getProperty("input.topic.name");
         final String msgTopicName = envProps.getProperty("msg.topic.name");
-        final String metaTopicName = envProps.getProperty("meta.topic.name");
-        final String metadataTableName = envProps.getProperty("metadata.ktable.name");
+        final String metadataTableName = envProps.getProperty("metadata.table.changelog.suffix");
+        final String[] msgPaths = envProps.getProperty("msg.field.paths").split(",");
+        final String metaRootPath = envProps.getProperty("meta.root.path");
+        final String msgSourceId = envProps.getProperty("msg.source.id");
 
         final StreamsBuilder builder = new StreamsBuilder();
 
@@ -131,25 +118,30 @@ public final class FilebeatsMessageExtractor {
           try {
             ObjectMapper mapper = new ObjectMapper();
 
-            //TODO configure fields to extract, and the field names for the message payload in the dev.properties
-            //TODO move the message json construction to a helper/parser class
+            //TODO move the message json parsing and construction to a helper/parser class
 
-            JsonNode idNode = beatsData.get("_id");
-            JsonNode msgNode = beatsData.get("fields").get("message");
-            JsonNode timeNode = beatsData.get("fields").get("@timestamp");
+            HashMap<String, JsonNode> msgNodes = new HashMap<>();     // key = new field name in message payload, value = the json node
+            ArrayList<String> fieldNamesToRemove = new ArrayList<>(); // stash the metadata field names to remove
+            for ( String field : msgPaths){
+                String[] pathAndName = field.split(":");
+                msgNodes.put(pathAndName[1].trim(), beatsData.at(pathAndName[0].trim()));
+                if(pathAndName[0].contains(metaRootPath)){
+                    String ogFieldName = pathAndName[0].substring(pathAndName[0].lastIndexOf('/')+1);
+                    fieldNamesToRemove.add(ogFieldName);
+                }
+            }
 
-            //make the lightweight message only event
+            //make the lightweight message data event
             JsonNode msgPayload = mapper.createObjectNode();
             ObjectNode msgObject = (ObjectNode)msgPayload;
-            msgObject.put("filebeats_id", idNode.toString());
-            msgObject.put("message", msgNode.toString());
-            msgObject.put("timestamp", timeNode.toString());
+            for (Map.Entry<String, JsonNode> entry : msgNodes.entrySet()){
+                msgObject.put(entry.getKey(), entry.getValue().toString());
+            }
 
             //make the metadata event
-            //TODO replace '.' in the field names with '_' for ktable column naming
-            ObjectNode metaObject = (ObjectNode)beatsData.get("fields");
-            metaObject.remove("message");
-            metaObject.remove("@timestamp");
+            ObjectNode metaObject = (ObjectNode)beatsData.at(metaRootPath);
+            metaObject.remove(fieldNamesToRemove);
+            metaObject.put(msgSourceId, msgNodes.get(msgSourceId).toString());
             JsonNode metaPayload = mapper.treeToValue(mapper.valueToTree(metaObject), JsonNode.class);
 
             //TODO update this to something more json friendly like: https://github.com/oyamist/merkle-json
