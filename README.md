@@ -6,7 +6,6 @@ Parse a filebeats kafka event. Split the message and the metadata in the event. 
 ```
 CREATE OR REPLACE TABLE filebeats_metadata
 (id 							VARCHAR PRIMARY KEY,
- filebeats_id                   VARCHAR,
 "agent.version.keyword"			Array<VARCHAR>,
 "host.architecture.keyword"		Array<VARCHAR>,
 "host.name.keyword"				Array<VARCHAR>,

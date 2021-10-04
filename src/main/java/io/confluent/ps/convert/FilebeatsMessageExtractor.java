@@ -96,7 +96,7 @@ public final class FilebeatsMessageExtractor {
         final String metadataTableName = envProps.getProperty("metadata.table.changelog.suffix");
         final String[] msgPaths = envProps.getProperty("msg.field.paths").split(",");
         final String metaRootPath = envProps.getProperty("meta.root.path");
-        final String msgSourceId = envProps.getProperty("msg.source.id");
+        final String msgFieldName = envProps.getProperty("msg.field.name");
 
         final StreamsBuilder builder = new StreamsBuilder();
 
@@ -135,17 +135,17 @@ public final class FilebeatsMessageExtractor {
             JsonNode msgPayload = mapper.createObjectNode();
             ObjectNode msgObject = (ObjectNode)msgPayload;
             for (Map.Entry<String, JsonNode> entry : msgNodes.entrySet()){
-                msgObject.put(entry.getKey(), entry.getValue().toString());
+                String value = entry.getValue().isTextual() ? entry.getValue().asText() : entry.getValue().toString();
+                msgObject.put(entry.getKey(), value);
             }
 
             //make the metadata event
             ObjectNode metaObject = (ObjectNode)beatsData.at(metaRootPath);
             metaObject.remove(fieldNamesToRemove);
-            metaObject.put(msgSourceId, msgNodes.get(msgSourceId).toString());
             JsonNode metaPayload = mapper.treeToValue(mapper.valueToTree(metaObject), JsonNode.class);
 
-            //TODO update this to something more json friendly like: https://github.com/oyamist/merkle-json
-            String generatedKey = DigestUtils.md5Hex( metaPayload.toString() );
+            //create a shared id to be used as the primary key in the metadata ktable, and the key in the message topic
+            String generatedKey = JsonHasher.generateHash(metaPayload);
 
             messages.add(KeyValue.pair(generatedKey, msgPayload));
             messages.add(KeyValue.pair(generatedKey, metaPayload));
@@ -158,18 +158,16 @@ public final class FilebeatsMessageExtractor {
         });
 
         KStream<String, JsonNode>[] branches = splits.branch(
-                (id, value) -> Objects.isNull(value.get("message")), //metadata
-                (id, value) -> true                                 //message
+                (id, value) -> Objects.nonNull(value.get(msgFieldName)), //message
+                (id, value) -> true                                      //metadata
         );
 
         Materialized m = Materialized.as(metadataTableName);
         m = m.withKeySerde(Serdes.String());
         m = m.withValueSerde(fbSerde);
 
-        branches[0].toTable(m);
-        branches[1].to(msgTopicName, Produced.with(Serdes.String(), fbSerde));
-
-
+        branches[0].to(msgTopicName, Produced.with(Serdes.String(), fbSerde));
+        branches[1].toTable(m);
 
         return builder.build();
     }
@@ -211,7 +209,19 @@ public final class FilebeatsMessageExtractor {
     private static void exampleProperties() {
         System.out.println("Please create a configuration properties file and pass it on the command line as an argument");
         System.out.println("Sample env.properties:");
-        //TODO - sample properties
+
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("application.id=filebeats-message-extractor");
+        System.out.println("bootstrap.servers=localhost:9092");
+        System.out.println("security.protocol=PLAINTEXT");
+        System.out.println("input.topic.name=filebeats-sample-data");
+        System.out.println("msg.topic.name=filebeats-messages-only");
+        System.out.println("metadata.table.changelog.suffix=metadata");
+        System.out.println("error.topic.name=filebeats-message-extractor-error");
+        System.out.println("msg.field.paths=/_id:filebeats_id, /fields/message:message, /fields/@timestamp:timestamp");
+        System.out.println("msg.field.name=message");
+        System.out.println("meta.root.path=/fields");
+        System.out.println("----------------------------------------------------------------");
     }
 
     /**
