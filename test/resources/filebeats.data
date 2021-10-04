@@ -1,0 +1,479 @@
+{
+  "_index": "fb_kafka",
+  "_type": "_doc",
+  "_id": "1Yc45xnsBmhpy6dWlLRF9",
+  "_score": 1,
+  "fields": {
+    "agent.version.keyword": [
+      "7.11.1"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "8/4/2021 6:13:25 PM 2524 PACKET  0000024005A7EC90 UDP Snd 1.2.3.6  717f R Q [8081   DR  NOERROR] A      (5)cloud(3)gti(6)mcafee(3)com(0)\nUDP response info at 0000024005A7EC90\n  Socket = 808\n  Remote addr 1.2.3.6, port 49865\n  Time Query=160585, Queued=0, Expire=0\n  Buf length = 0x0200 (512)\n  Msg length = 0x00a6 (166)\n  Message:\n    XID       0x717f\n    Flags     0x8180\n      QR        1 (RESPONSE)\n      OPCODE    0 (QUERY)\n      AA        0\n      TC        0\n      RD        1\n      RA        1\n      Z         0\n      CD        0\n      AD        0\n      RCODE     0 (NOERROR)\n    QCOUNT    1\n    ACOUNT    4\n    NSCOUNT   0\n    ARCOUNT   0\n    QUESTION SECTION:\n    Offset = 0x000c, RR count = 0\n      QTYPE   A (1)\n      QCLASS  1\n    ANSWER SECTION:\n    Offset = 0x0026, RR count = 0\n      TYPE   CNAME  (5)\n      CLASS  1\n      TTL    24\n      DLEN   30\n      DATA       Offset = 0x0050, RR count = 1\n      TYPE   CNAME  (5)\n      CLASS  1\n      TTL    48\n      DLEN   42\n      DATA       Offset = 0x0086, RR count = 2\n      TYPE   A  (1)\n      CLASS  1\n      TTL    44\n      DLEN   4\n      DATA   5.6.5.8\n    Offset = 0x0096, RR count = 3\n      TYPE   A  (1)\n      CLASS  1\n      TTL    44\n      DLEN   4\n      DATA   52.69.3.12\n    AUTHORITY SECTION:\n      empty\n    ADDITIONAL SECTION:\n      empty\n"
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_doc",
+  "_id": "2Dc45xnsBmhpy6dWlLRF9",
+  "_score": 1,
+  "fields": {
+    "agent.version.keyword": [
+      "7.11.1"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "8/5/2021 11:13:25 PM 2524 PACKET  This is test message number 2."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_doc",
+  "_id": "3Zc45xnsBmhpy6dWlLRF9",
+  "_score": 1,
+  "fields": {
+    "agent.version.keyword": [
+      "7.11.1"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "8/6/2021 6:13:25 PM 2524 PACKET  This is test message number 3."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\usmc_dns_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
