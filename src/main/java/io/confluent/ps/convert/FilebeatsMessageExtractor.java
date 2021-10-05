@@ -13,7 +13,6 @@ import org.apache.kafka.common.serialization.Serializer;
 import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
 import org.apache.kafka.streams.processor.WallclockTimestampExtractor;
 import org.slf4j.Logger;
@@ -28,8 +27,8 @@ import java.util.concurrent.CountDownLatch;
 import static org.apache.kafka.common.serialization.Serdes.String;
 
 /**
-* Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a KTable,
-* and the message to another topic.
+* Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a compacted topic,
+* and the messages to another topic.
 */
 public final class FilebeatsMessageExtractor {
     private final Logger log = LoggerFactory.getLogger(FilebeatsMessageExtractor.class);
@@ -89,9 +88,8 @@ public final class FilebeatsMessageExtractor {
         log.debug("Starting buildTopology");
         final String inputTopicName = envProps.getProperty("input.topic.name");
         final String msgTopicName = envProps.getProperty("msg.topic.name");
-        final String metadataTableName = envProps.getProperty("metadata.table.changelog.suffix");
+        final String metadataTopicName = envProps.getProperty("metadata.topic.name");
         final String[] msgPaths = envProps.getProperty("msg.field.paths").split(",");
-        final String metaRootPath = envProps.getProperty("meta.root.path");
         final String msgFieldName = envProps.getProperty("msg.field.name");
 
         final StreamsBuilder builder = new StreamsBuilder();
@@ -110,22 +108,23 @@ public final class FilebeatsMessageExtractor {
         final KStream<String, JsonNode> beatsStream = builder.stream(inputTopicName, Consumed.with(Serdes.String(), fbSerde));
 
         KStream<String, JsonNode> splits = beatsStream.flatMap( (key, beatsData) -> {
+
+          log.debug("Deserialized input message.");
+
           List<KeyValue<String, JsonNode>> messages = new LinkedList<>();
           try {
             ObjectMapper mapper = new ObjectMapper();
 
-            //TODO move the message json parsing and construction to a helper/parser class
-
+            //parse the message field config values
             HashMap<String, JsonNode> msgNodes = new HashMap<>();     // key = new field name in message payload, value = the json node
-            ArrayList<String> fieldNamesToRemove = new ArrayList<>(); // stash the metadata field names to remove
+            ArrayList<String> fieldsToRemove = new ArrayList<>();     // stash the metadata field paths to remove
             for ( String field : msgPaths){
                 String[] pathAndName = field.split(":");
                 msgNodes.put(pathAndName[1].trim(), beatsData.at(pathAndName[0].trim()));
-                if(pathAndName[0].contains(metaRootPath)){
-                    String ogFieldName = pathAndName[0].substring(pathAndName[0].lastIndexOf('/')+1);
-                    fieldNamesToRemove.add(ogFieldName);
-                }
+                fieldsToRemove.add(pathAndName[0].trim());
             }
+
+            log.info("Generating a message event with fields: " + fieldsToRemove.toArray().toString());
 
             //make the lightweight message data event
             JsonNode msgPayload = mapper.createObjectNode();
@@ -135,16 +134,27 @@ public final class FilebeatsMessageExtractor {
                 msgObject.put(entry.getKey(), value);
             }
 
+            log.info("Message event constructed successfully.");
+
             //make the metadata event
-            ObjectNode metaObject = (ObjectNode)beatsData.at(metaRootPath);
-            metaObject.remove(fieldNamesToRemove);
+            ObjectNode metaObject = (ObjectNode)beatsData;
+            for( String path : fieldsToRemove) {
+                JsonHasher.removeNode(metaObject, path);
+            }
             JsonNode metaPayload = mapper.treeToValue(mapper.valueToTree(metaObject), JsonNode.class);
+
+            log.info("Metadata event constructed successfully.");
 
             //create a shared id to be used as the primary key in the metadata ktable, and the key in the message topic
             String generatedKey = JsonHasher.generateHash(metaPayload);
 
+            log.info("Generated hash id for message and metadata: " + generatedKey );
+
             messages.add(KeyValue.pair(generatedKey, msgPayload));
             messages.add(KeyValue.pair(generatedKey, metaPayload));
+
+            log.debug("Message = {}", msgPayload.toString());
+            log.debug("Metadata = {}", metaPayload.toString());
 
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -158,12 +168,8 @@ public final class FilebeatsMessageExtractor {
                 (id, value) -> true                                      //metadata
         );
 
-        Materialized m = Materialized.as(metadataTableName);
-        m = m.withKeySerde(Serdes.String());
-        m = m.withValueSerde(fbSerde);
-
         branches[0].to(msgTopicName, Produced.with(Serdes.String(), fbSerde));
-        branches[1].toTable(m);
+        branches[1].to(metadataTopicName, Produced.with(Serdes.String(), fbSerde));
 
         return builder.build();
     }

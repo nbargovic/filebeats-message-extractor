@@ -1,11 +1,11 @@
 {
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "11Yc45xnsBmhpy6dWlLRF9",
+  "_id": "1Yc45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "99999"
+      "7.11.1"
     ],
     "host.architecture.keyword": [
       "x86_64"
@@ -119,7 +119,7 @@
       "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
     ],
     "log.file.path.keyword": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.type.keyword": [
       "filebeat"
@@ -150,7 +150,7 @@
       "windows"
     ],
     "log.file.path": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.ephemeral_id": [
       "56e2dfef-ce88-4481-861d-fd61b7d77f73"
@@ -161,11 +161,11 @@
 {
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "22Dc45xnsBmhpy6dWlLRF9",
+  "_id": "2Dc45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "99999"
+      "7.11.1"
     ],
     "host.architecture.keyword": [
       "x86_64"
@@ -279,7 +279,7 @@
       "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
     ],
     "log.file.path.keyword": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.type.keyword": [
       "filebeat"
@@ -295,7 +295,7 @@
       "QUAN1235"
     ],
     "message": [
-      "8/5/2021 11:13:25 PM 2524 PACKET  This is test message number 2."
+      "This is test message number 2."
     ],
     "host.os.family.keyword": [
       "windows"
@@ -310,7 +310,7 @@
       "windows"
     ],
     "log.file.path": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.ephemeral_id": [
       "56e2dfef-ce88-4481-861d-fd61b7d77f73"
@@ -322,16 +322,17 @@
   "breaking": "json",
   "_type": "_doc",
   "_id": "woof",
-  "_score": 1,
+  "_score": 1
+
 !
 {
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "33c45xnsBmhpy6dWlLRF9",
+  "_id": "3c45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "99999"
+      "7.11.1"
     ],
     "host.architecture.keyword": [
       "x86_64"
@@ -445,7 +446,7 @@
       "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
     ],
     "log.file.path.keyword": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.type.keyword": [
       "filebeat"
@@ -461,7 +462,7 @@
       "QUAN1235"
     ],
     "message": [
-      "8/6/2021 6:13:25 PM 2524 PACKET  This is test message number 3."
+      "This is test message number 3. 8/6/2021 6:13:25 PM 2524 PACKET"
     ],
     "host.os.family.keyword": [
       "windows"
@@ -476,7 +477,1127 @@
       "windows"
     ],
     "log.file.path": [
-      "C:\\Temp\\usmc_dns_sample2.log"
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_doc",
+  "_id": "4d45xnsBmhpy6dWlLRF9",
+  "_score": 1,
+  "fields": {
+    "agent.version.keyword": [
+      "7.11.1"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "4th Test Message"
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_doc",
+  "_id": "5e45xnsBmhpy6dWlLRF9",
+  "_score": 1,
+  "fields": {
+    "agent.version.keyword": [
+      "7.11.1"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "This is test message number 5."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_txt",
+  "_id": "6f45xnsBmhpy6dWlLRF9",
+  "_score": 55,
+  "fields": {
+    "agent.version.keyword": [
+      "9.23.0"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "6th test message."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_txt",
+  "_id": "7g45xnsBmhpy6dWlLRF9",
+  "_score": 55,
+  "fields": {
+    "agent.version.keyword": [
+      "9.23.0"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "Message #7 right here."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_txt",
+  "_id": "8h45xnsBmhpy6dWlLRF9",
+  "_score": 55,
+  "fields": {
+    "agent.version.keyword": [
+      "9.23.0"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "8th test message."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_txt",
+  "_id": "9I45xnsBmhpy6dWlLRF9",
+  "_score": 55,
+  "fields": {
+    "agent.version.keyword": [
+      "9.23.0"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "message numero 9."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.ephemeral_id": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ]
+  }
+}
+!
+{
+  "_index": "fb_kafka",
+  "_type": "_unk",
+  "_id": "0J45xnsBmhpy6dWlLRF9",
+  "_score": 99,
+  "fields": {
+    "agent.version.keyword": [
+      "5.5.0"
+    ],
+    "host.architecture.keyword": [
+      "x86_64"
+    ],
+    "host.name.keyword": [
+      "QUAN1235"
+    ],
+    "host.os.build.keyword": [
+      "9600.20094"
+    ],
+    "host.hostname": [
+      "QUAN1235"
+    ],
+    "host.mac": [
+      "02:00:4c:4f:4f:50",
+      "00:50:56:b4:ea:13"
+    ],
+    "agent.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "ecs.version.keyword": [
+      "1.6.0"
+    ],
+    "host.ip.keyword": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "host.os.version": [
+      "6.3"
+    ],
+    "host.os.name": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "agent.name": [
+      "QUAN1235"
+    ],
+    "host.id.keyword": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "host.name": [
+      "QUAN1235"
+    ],
+    "host.os.version.keyword": [
+      "6.3"
+    ],
+    "agent.id.keyword": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "input.type": [
+      "log"
+    ],
+    "@version.keyword": [
+      "1"
+    ],
+    "log.offset": [
+      16258
+    ],
+    "log.flags": [
+      "multiline"
+    ],
+    "agent.hostname": [
+      "QUAN1235"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "agent.id": [
+      "eddac5f2-f243-4f26-be12-91392b9fc7ee"
+    ],
+    "ecs.version": [
+      "1.6.0"
+    ],
+    "host.hostname.keyword": [
+      "QUAN1235"
+    ],
+    "agent.version": [
+      "7.11.1"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "input.type.keyword": [
+      "log"
+    ],
+    "host.os.build": [
+      "9600.20094"
+    ],
+    "host.ip": [
+      "1.2.3.5",
+      "2.3.6.90"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "host.os.kernel.keyword": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "log.flags.keyword": [
+      "multiline"
+    ],
+    "host.os.kernel": [
+      "6.3.9600.20090 (winblue_ltsb.210709-1700)"
+    ],
+    "@version": [
+      "1"
+    ],
+    "host.os.name.keyword": [
+      "Windows Server 2012 R2 Datacenter"
+    ],
+    "host.id": [
+      "bdaf8f04-a7a7-4125-bd74-349cdfd7cafb"
+    ],
+    "log.file.path.keyword": [
+      "C:\\Temp\\_sample2.log"
+    ],
+    "agent.type.keyword": [
+      "filebeat"
+    ],
+    "agent.ephemeral_id.keyword": [
+      "56e2dfef-ce88-4481-861d-fd61b7d77f73"
+    ],
+    "host.mac.keyword": [
+      "12:20:3c:4f:5f:60",
+      "70:80:96:14:ea:45"
+    ],
+    "agent.name.keyword": [
+      "QUAN1235"
+    ],
+    "message": [
+      "Message 10 is the end."
+    ],
+    "host.os.family.keyword": [
+      "windows"
+    ],
+    "@timestamp": [
+      "2021-09-08T16:23:41.041Z"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "host.os.platform.keyword": [
+      "windows"
+    ],
+    "log.file.path": [
+      "C:\\Temp\\_sample2.log"
     ],
     "agent.ephemeral_id": [
       "56e2dfef-ce88-4481-861d-fd61b7d77f73"

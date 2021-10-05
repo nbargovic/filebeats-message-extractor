@@ -1,5 +1,5 @@
 # filebeats-message-extractor
-Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a KTable, and the message to another topic.
+Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a compacted topic, and the message to another topic. Using the same key which is unique to the metadata, this allows teh data to be re joined alter if desired.
 
 ### Build and Execution Environment
 * Java 8
@@ -49,13 +49,15 @@ Run the `filebeats-message-extractor-0.1-jar-with-dependencies.jar` with Java 8.
  java -jar filebeats-message-extractor-0.1-jar-with-dependencies.jar configuration/dev.properties
 ```
 
-## Testing example
+## Testing/Demo example
 
 #### 1. Create the topics
+Note: The `partitions` and `segment.bytes` configuration on the metadata topic is set low for demo purposes only. In production, you will want to configure the partitions and log cleaner compaction less aggressively.
 ```
- kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-sample-data --replication-factor 1 --partitions 3 
- kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-messages-only --replication-factor 1 --partitions 3
- kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-message-extractor-error --replication-factor 1 --partitions 3 
+ kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-sample-data --replication-factor 1 --partitions 1 
+ kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-messages-only --replication-factor 1 --partitions 1
+ kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-metadata --replication-factor 1 --partitions 1 --config "cleanup.policy=compact" --config "delete.retention.ms=100" --config "segment.ms=100" --config "segment.bytes=16000" --config "min.cleanable.dirty.ratio=0.01"
+ kafka-topics --bootstrap-server localhost:9092 --create --topic filebeats-message-extractor-error --replication-factor 1 --partitions 1 
 ```
 
 #### 2. Push the sample filebeats data to the input topic
@@ -69,64 +71,13 @@ Reference the Configuration and Execution sections above.
  java -jar target/filebeats-message-extractor-0.1-jar-with-dependencies.jar configuration/dev.properties
 ```
 
-#### 4. Create the KTable
-You can use these ksqlDB commands in the Confluent Control Center editor to query the data in the KTable.
-
-NOTE! - Be sure to set `auto.offset.reset = earliest` when executing this.
-```
-CREATE OR REPLACE TABLE filebeats_metadata
-(id 					VARCHAR PRIMARY KEY,
-"agent.version.keyword"			Array<VARCHAR>,
-"host.architecture.keyword"		Array<VARCHAR>,
-"host.name.keyword"			Array<VARCHAR>,
-"host.os.build.keyword"			Array<VARCHAR>,
-"host.hostname"				Array<VARCHAR>,
-"host.mac"				Array<VARCHAR>,
-"agent.hostname.keyword"		Array<VARCHAR>,
-"ecs.version.keyword"		        Array<VARCHAR>,
-"host.ip.keyword"			Array<VARCHAR>,
-"host.os.version"			Array<VARCHAR>,
-"host.os.name"				Array<VARCHAR>,
-"agent.name"				Array<VARCHAR>,
-"host.id.keyword"			Array<VARCHAR>,
-"host.name"				Array<VARCHAR>,
-"host.os.version.keyword"	        Array<VARCHAR>,
-"agent.id.keyword"			Array<VARCHAR>,
-"input.type"				Array<VARCHAR>,
-"@version.keyword"			Array<VARCHAR>,
-"log.offset"				Array<VARCHAR>,
-"log.flags"				Array<VARCHAR>,
-"agent.hostname"			Array<VARCHAR>,
-"host.architecture"			Array<VARCHAR>,
-"agent.id"				Array<VARCHAR>,
-"ecs.version"				Array<VARCHAR>,
-"host.hostname.keyword"			Array<VARCHAR>,
-"agent.version"				Array<VARCHAR>,
-"host.os.family"			Array<VARCHAR>,
-"input.type.keyword"			Array<VARCHAR>,
-"host.os.build"				Array<VARCHAR>,
-"host.ip"				Array<VARCHAR>,
-"agent.type"				Array<VARCHAR>,
-"host.os.kernel.keyword"		Array<VARCHAR>,
-"log.flags.keyword"			Array<VARCHAR>,
-"host.os.kernel"			Array<VARCHAR>,
-"@version"				Array<VARCHAR>,
-"host.os.name.keyword"			Array<VARCHAR>,
-"host.id"				Array<VARCHAR>,
-"log.file.path.keyword" 		Array<VARCHAR>,
-"agent.type.keyword"			Array<VARCHAR>,
-"agent.ephemeral_id.keyword"            Array<VARCHAR>,
-"host.mac.keyword"			Array<VARCHAR>,
-"agent.name.keyword"			Array<VARCHAR>,
-"host.os.family.keyword"	        Array<VARCHAR>,
-"host.os.platform"			Array<VARCHAR>,
-"host.os.platform.keyword"		Array<VARCHAR>,
-"log.file.path"				Array<VARCHAR>,
-"agent.ephemeral_id"			Array<VARCHAR>)
-WITH (KAFKA_TOPIC = 'filebeats-message-extractor-metadata-changelog',
-      VALUE_FORMAT='JSON');
-      
-SELECT * FROM filebeats_metadata EMIT CHANGES;      
-```
 
 #### 5. Validation
+There are 11 messages in the `filebeats.data` sample.  If you inspect each topic after running this stream with either the Confluent Control Center or a command line consumer, you should find the following results:
+```
+kafka-console-consumer --bootstrap-server=localhost:9092 --topic filebeats-metadata --from-beginning
+```
+* filebeats-sample-data topic = 11 messages
+* filebeats-message-only topic = 10 messages
+* filebeats-metadata topic = 4 messages
+* filebeats-message-extractor-error topic = 1 message
