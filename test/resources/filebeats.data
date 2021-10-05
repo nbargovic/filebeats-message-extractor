@@ -1,11 +1,11 @@
 {
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "1Yc45xnsBmhpy6dWlLRF9",
+  "_id": "11Yc45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "7.11.1"
+      "99999"
     ],
     "host.architecture.keyword": [
       "x86_64"
@@ -161,11 +161,11 @@
 {
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "2Dc45xnsBmhpy6dWlLRF9",
+  "_id": "22Dc45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "7.11.1"
+      "99999"
     ],
     "host.architecture.keyword": [
       "x86_64"
@@ -319,13 +319,19 @@
 }
 !
 {
+  "breaking": "json",
+  "_type": "_doc",
+  "_id": "woof",
+  "_score": 1,
+!
+{
   "_index": "fb_kafka",
   "_type": "_doc",
-  "_id": "3Zc45xnsBmhpy6dWlLRF9",
+  "_id": "33c45xnsBmhpy6dWlLRF9",
   "_score": 1,
   "fields": {
     "agent.version.keyword": [
-      "7.11.1"
+      "99999"
     ],
     "host.architecture.keyword": [
       "x86_64"

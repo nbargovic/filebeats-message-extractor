@@ -1,8 +1,6 @@
 # filebeats-message-extractor
 Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a KTable, and the message to another topic.
 
-### Work in progress
-
 ### Build and Execution Environment
 * Java 8
 * Confluent Platform 6.1 or newer
@@ -131,3 +129,4 @@ WITH (KAFKA_TOPIC = 'filebeats-message-extractor-metadata-changelog',
 SELECT * FROM filebeats_metadata EMIT CHANGES;      
 ```
 
+#### 5. Validation
