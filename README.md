@@ -20,7 +20,7 @@ A successful build will create a target directory with the following two jar fil
 
 The `filebeats-message-extractor-with-dependencies.jar` file contains all the dependencies needed to run the application. Therefore, this dependencies jar file should be the file executed when running the KStream Application.
 
-##Configuration
+## Configuration
 The KStream Application requires a configuration properties file.
 
 Example:
@@ -42,6 +42,13 @@ msg.field.name=message
 ```
 
 With the above configuration, the KStreams application will connect to the Kafka Brokers identified by the `bootstrap.servers` cluster making use of the `security.protocol` configuration. The KStreams Application will use a consumer group with the `application.id` and read its input from `input.topic.name` and write out the parsed message events to `msg.topic.name`, and the metadata to a compacted topic named `filebeats_metadata`. If any configured exceptions are caught with the `input.topic.name` deserialization or parsing, the event will not be written to `msg.topic.name`, and will instead be written to `error.topic.name`. To horizontally scale the KStream, make sure the `input.topic.name` has multiple partitions and start another jvm with the same configuration properties file.
+
+
+The elements that generate the lightweight message event are configurable in the `msg.field.paths` property.  This is a comma seperated list of JSONPointers and names ( <pointer-to-element>:<new-name> ). So for example, if the source json is `{"object":{"msg":"test"}}` if you want the message event to use the json element called `msg`, and you want it be be named `message` in the new event, then you would used `/object/msg:message` 
+ 
+Here is additional information on how to construct a JSONPointer:
+ 
+![Screen Shot 2021-10-06 at 2 54 03 PM](https://user-images.githubusercontent.com/5939204/136265486-fdf6cd9d-5dc8-4f21-a4c2-6e4b609bce91.png)
 
 ## Execution
 Run the `filebeats-message-extractor-0.1-jar-with-dependencies.jar` with Java 8.
