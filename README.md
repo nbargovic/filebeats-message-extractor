@@ -44,7 +44,7 @@ msg.field.name=message
 With the above configuration, the KStreams application will connect to the Kafka Brokers identified by the `bootstrap.servers` cluster making use of the `security.protocol` configuration. The KStreams Application will use a consumer group with the `application.id` and read its input from `input.topic.name` and write out the parsed message events to `msg.topic.name`, and the metadata to a compacted topic named `filebeats_metadata`. If any configured exceptions are caught with the `input.topic.name` deserialization or parsing, the event will not be written to `msg.topic.name`, and will instead be written to `error.topic.name`. To horizontally scale the KStream, make sure the `input.topic.name` has multiple partitions and start another jvm with the same configuration properties file.
 
 
-The elements that generate the lightweight message event are configurable in the `msg.field.paths` property.  This is a comma seperated list of JSONPointers and names ( <pointer-to-element>:<new-name> ). So for example, if the source json is `{"object":{"msg":"test"}}` if you want the message event to use the json element called `msg`, and you want it be be named `message` in the new event, then you would used `/object/msg:message` 
+The elements that generate the lightweight message event are configurable in the `msg.field.paths` property.  This is a comma seperated list of JSONPointers and names ( \<pointer-to-element\>:\<new-name\> ). So for example, if the source json is `{"object":{"msg":"test"}}` if you want the message event to use the json element called `msg`, and you want it be be named `message` in the new event, then you would used `/object/msg:message` 
  
 Here is additional information on how to construct a JSONPointer:
  
