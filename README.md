@@ -1,5 +1,5 @@
 # filebeats-message-extractor
-Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a compacted topic, and the message to another topic. Using the same key which is unique to the metadata, this allows teh data to be re joined alter if desired.
+Parse a filebeats kafka event. Split the message and the metadata in the event. Route the metadata into a compacted topic, and the message to another topic. Using the same key which is unique to the metadata, this allows the data to be re joined, if desired.
 
 ### Build and Execution Environment
 * Java 8
