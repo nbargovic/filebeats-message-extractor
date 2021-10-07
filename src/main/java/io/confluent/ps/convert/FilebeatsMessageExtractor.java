@@ -201,6 +201,8 @@ public final class FilebeatsMessageExtractor {
         try {
             streams.cleanUp();
             streams.start();
+            System.out.println("Stream successfully started...");
+            log.info("Stream successfully started.");
             latch.await();
         } catch (Throwable e) {
             System.exit(1);
@@ -218,11 +220,10 @@ public final class FilebeatsMessageExtractor {
         System.out.println("security.protocol=PLAINTEXT");
         System.out.println("input.topic.name=filebeats-sample-data");
         System.out.println("msg.topic.name=filebeats-messages-only");
-        System.out.println("metadata.table.changelog.suffix=metadata");
-        System.out.println("error.topic.name=filebeats-message-extractor-error");
+        System.out.println("metadata.topic.name=metadata");
+        System.out.println("error.topic.name=filebeats-metadata");
         System.out.println("msg.field.paths=/_id:filebeats_id, /fields/message:message, /fields/@timestamp:timestamp");
         System.out.println("msg.field.name=message");
-        System.out.println("meta.root.path=/fields");
         System.out.println("----------------------------------------------------------------");
     }
 

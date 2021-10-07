@@ -2,3 +2,4 @@
 target
 .DS_store
 test/.DS_store
+filebeats-message-extractor.log
